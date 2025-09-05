@@ -471,7 +471,7 @@ function OrderModal({ order, onClose, onUpdateStatus, isUpdating }: OrderModalPr
                 <label className="form-label">Status zlecenia</label>
                 <select
                   value={newStatus}
-                  onChange={(e) => setNewStatus(e.target.value)}
+                  onChange={(e) => setNewStatus(e.target.value as 'przyjęte' | 'w_trakcie' | 'zakończone')}
                   className="form-input"
                 >
                   <option value="przyjęte">Przyjęte</option>
