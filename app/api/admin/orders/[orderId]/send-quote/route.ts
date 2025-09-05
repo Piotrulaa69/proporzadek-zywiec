@@ -44,6 +44,14 @@ export async function POST(
       )
     }
 
+    // Check if supabaseAdmin is available
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: 'Database configuration error' },
+        { status: 500 }
+      )
+    }
+
     // Fetch order from database
     const { data: order, error } = await supabaseAdmin
       .from('orders')

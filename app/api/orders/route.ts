@@ -77,6 +77,14 @@ export async function POST(request: NextRequest) {
       updated_at: new Date().toISOString()
     }
 
+    // Check if supabaseAdmin is available
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: 'Database configuration error' },
+        { status: 500 }
+      )
+    }
+
     // Insert order into database
     const { data: order, error } = await supabaseAdmin
       .from('orders')

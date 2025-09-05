@@ -69,6 +69,14 @@ export async function PATCH(
       updateData.final_price = parseFloat(body.final_price) || null
     }
 
+    // Check if supabaseAdmin is available
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: 'Database configuration error' },
+        { status: 500 }
+      )
+    }
+
     // Update order in database
     const { data: order, error } = await supabaseAdmin
       .from('orders')
@@ -123,6 +131,14 @@ export async function GET(
       return NextResponse.json(
         { error: 'Brak ID zlecenia' },
         { status: 400 }
+      )
+    }
+
+    // Check if supabaseAdmin is available
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: 'Database configuration error' },
+        { status: 500 }
       )
     }
 

@@ -15,6 +15,14 @@ export async function GET(
       )
     }
 
+    // Check if supabaseAdmin is available
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: 'Database configuration error' },
+        { status: 500 }
+      )
+    }
+
     // Fetch order by tracking ID
     const { data: order, error } = await supabaseAdmin
       .from('orders')
