@@ -29,7 +29,7 @@ export default function PricingSection() {
         'Do 50m² - 269 zł',
         'Powyżej 50m² - +2,5zł za każdy m²',
         'Sprzątanie ekologiczne GRATIS',
-        'Mycie okien w cenie'
+        'Odkurzanie i mycie podłóg'
       ],
       popular: false
     },
