@@ -62,13 +62,18 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
 
     if (searchTerm) {
       const term = searchTerm.toLowerCase()
-      filtered = filtered.filter(order =>
-        order.first_name.toLowerCase().includes(term) ||
-        order.last_name.toLowerCase().includes(term) ||
-        order.email.toLowerCase().includes(term) ||
-        order.phone.includes(term) ||
-        order.address.toLowerCase().includes(term)
-      )
+      filtered = filtered.filter(order => {
+        // Utwórz pełny adres z nowych pól lub użyj starego pola
+        const fullAddress = order.street && order.house_number && order.postal_code && order.city
+          ? `${order.street} ${order.house_number} ${order.postal_code} ${order.city}`
+          : order.address || ''
+        
+        return order.first_name.toLowerCase().includes(term) ||
+               order.last_name.toLowerCase().includes(term) ||
+               order.email.toLowerCase().includes(term) ||
+               order.phone.includes(term) ||
+               fullAddress.toLowerCase().includes(term)
+      })
     }
 
     setFilteredOrders(filtered)
@@ -315,7 +320,12 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
                           </div>
                           <div className="text-sm text-gray-500 flex items-center">
                             <MapPin className="h-3 w-3 mr-1" />
-                            {order.address.substring(0, 30)}...
+                            {(() => {
+                              const displayAddress = order.street && order.house_number && order.postal_code && order.city
+                                ? `${order.street} ${order.house_number}, ${order.postal_code} ${order.city}`
+                                : order.address || 'Brak adresu'
+                              return displayAddress.length > 30 ? displayAddress.substring(0, 30) + '...' : displayAddress
+                            })()}
                           </div>
                         </div>
                       </div>
@@ -444,7 +454,11 @@ function OrderModal({ order, onClose, onUpdateStatus, isUpdating }: OrderModalPr
                   <div><strong>Imię i nazwisko:</strong> {order.first_name} {order.last_name}</div>
                   <div><strong>E-mail:</strong> {order.email}</div>
                   <div><strong>Telefon:</strong> {order.phone}</div>
-                  <div><strong>Adres:</strong> {order.address}</div>
+                  <div><strong>Adres:</strong> {
+                    order.street && order.house_number && order.postal_code && order.city
+                      ? `${order.street} ${order.house_number}, ${order.postal_code} ${order.city}`
+                      : order.address || 'Brak adresu'
+                  }</div>
                 </div>
               </div>
               <div>
@@ -457,6 +471,58 @@ function OrderModal({ order, onClose, onUpdateStatus, isUpdating }: OrderModalPr
                 </div>
               </div>
             </div>
+
+            {/* Szczegóły kalkulatora */}
+            {order.service_details && (
+              <div>
+                <h3 className="font-medium text-gray-900 mb-2">Szczegóły wyceny z kalkulatora</h3>
+                <div className="bg-blue-50 p-3 rounded space-y-2 text-sm">
+                  <div><strong>Usługa:</strong> {order.service_details.service_name}</div>
+                  <div><strong>Cena bazowa:</strong> {order.service_details.base_price} zł</div>
+                  {order.service_details.additional_services_total > 0 && (
+                    <div><strong>Usługi dodatkowe:</strong> +{order.service_details.additional_services_total} zł</div>
+                  )}
+                  {order.service_details.eco_surcharge && (
+                    <div><strong>Dopłata ekologiczna:</strong> +{order.service_details.eco_surcharge} zł</div>
+                  )}
+                  <div className="border-t pt-2 font-medium">
+                    <strong>Razem z kalkulatora:</strong> {typeof order.service_details.total_calculated === 'string' 
+                      ? order.service_details.total_calculated 
+                      : `${order.service_details.total_calculated} zł`
+                    }
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Usługi dodatkowe */}
+            {order.additional_services && order.additional_services.length > 0 && (
+              <div>
+                <h3 className="font-medium text-gray-900 mb-2">Wybrane usługi dodatkowe</h3>
+                <div className="bg-gray-50 p-3 rounded">
+                  <ul className="text-sm space-y-1">
+                    {order.additional_services.map((service, index) => (
+                      <li key={index} className="flex justify-between">
+                        <div className="flex items-center space-x-2">
+                          <span>{service.name}</span>
+                          {service.quantity && service.quantity > 1 && (
+                            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-medium">
+                              x{service.quantity}
+                            </span>
+                          )}
+                        </div>
+                        <span>
+                          {service.id === 'eco' ? '+9%' : 
+                           service.quantity && service.quantity > 1 ? 
+                           `+${service.price * service.quantity} zł` : 
+                           `+${service.price} zł`}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
 
             {order.additional_notes && (
               <div>

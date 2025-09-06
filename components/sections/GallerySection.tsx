@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ChevronLeft, ChevronRight, Eye } from 'lucide-react'
+import { Eye } from 'lucide-react'
 
 interface GalleryItem {
   id: number
@@ -45,15 +45,6 @@ const galleryItems: GalleryItem[] = [
 
 export default function GallerySection() {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  const nextItem = () => {
-    setCurrentIndex((prev) => (prev + 1) % galleryItems.length)
-  }
-
-  const prevItem = () => {
-    setCurrentIndex((prev) => (prev - 1 + galleryItems.length) % galleryItems.length)
-  }
 
   return (
     <section id="gallery" className="py-20 bg-gray-50">
@@ -122,34 +113,7 @@ export default function GallerySection() {
           ))}
         </div>
 
-        {/* Navigation */}
-        <div className="flex justify-center items-center space-x-4">
-          <button
-            onClick={prevItem}
-            className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow duration-200"
-          >
-            <ChevronLeft className="h-6 w-6 text-gray-600" />
-          </button>
-          
-          <div className="flex space-x-2">
-            {galleryItems.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                  index === currentIndex ? 'bg-primary-600' : 'bg-gray-300'
-                }`}
-              />
-            ))}
-          </div>
-          
-          <button
-            onClick={nextItem}
-            className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow duration-200"
-          >
-            <ChevronRight className="h-6 w-6 text-gray-600" />
-          </button>
-        </div>
+
 
         {/* Modal */}
         {selectedItem && (

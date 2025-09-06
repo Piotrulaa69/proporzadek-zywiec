@@ -53,10 +53,10 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/order" className="btn-primary inline-flex items-center justify-center">
+              <a href="#calculator" className="btn-primary inline-flex items-center justify-center">
                 Zamów sprzątanie
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+              </a>
               <a href="#services" className="btn-secondary inline-flex items-center justify-center">
                 Zobacz usługi
               </a>

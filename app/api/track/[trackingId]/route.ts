@@ -54,6 +54,8 @@ export async function GET(
       admin_notes: order.admin_notes,
       estimated_price: order.estimated_price,
       final_price: order.final_price,
+      additional_services: order.additional_services,
+      service_details: order.service_details,
       created_at: order.created_at,
       updated_at: order.updated_at
     }

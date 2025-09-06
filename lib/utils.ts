@@ -14,34 +14,41 @@ export function validateEmail(email: string): boolean {
 }
 
 export function validatePhone(phone: string): boolean {
-  const phoneRegex = /^[\+]?[0-9\s\-\(\)]{9,}$/
-  return phoneRegex.test(phone)
+  // Sprawdza format +48 XXX XXX XXX (9 cyfr po +48 z opcjonalnymi spacjami)
+  const phoneRegex = /^\+48 \d{3}( \d{3})?( \d{3})?$/
+  // Sprawdź też czy ma dokładnie 9 cyfr
+  const digitsOnly = phone.replace(/\D/g, '')
+  return phoneRegex.test(phone) && digitsOnly.length === 11 // 48 + 9 cyfr
 }
 
 export function calculatePrice(cleaningType: string, squareMeters: number): number {
-  let basePrice = 80
-  
-  switch (cleaningType) {
-    case 'podstawowe':
-      basePrice = 80
-      break
-    case 'głębokie':
-      basePrice = 120
-      break
-    case 'biurowe':
-      basePrice = 100
-      break
-    case 'po_remoncie':
-      basePrice = 200
-      break
-    default:
-      basePrice = 80
+  // Sprzątanie po remoncie - wycena indywidualna
+  if (cleaningType === 'po_remoncie') {
+    return 0 // Wycena indywidualna
   }
   
-  const pricePerSqm = cleaningType === 'po_remoncie' ? 3 : 2
-  const additionalArea = Math.max(0, squareMeters - 50)
+  // Cennik dla sprzątania mieszkań
+  if (cleaningType === 'podstawowe' || cleaningType === 'głębokie') {
+    if (squareMeters <= 30) return 249
+    else if (squareMeters <= 40) return 259
+    else if (squareMeters <= 50) return 269
+    else if (squareMeters <= 60) return 289
+    else if (squareMeters <= 70) return 299
+    else if (squareMeters <= 80) return 379
+    else if (squareMeters <= 90) return 399
+    else if (squareMeters <= 100) return 429
+    else if (squareMeters <= 120) return 499
+    else return 0 // Wycena indywidualna dla powyżej 120m²
+  }
   
-  return basePrice + (additionalArea * pricePerSqm)
+  // Cennik dla sprzątania biur
+  if (cleaningType === 'biurowe') {
+    if (squareMeters <= 50) return 239
+    else if (squareMeters <= 100) return 269
+    else return 0 // Wycena indywidualna dla powyżej 100m²
+  }
+  
+  return 249 // Domyślna cena
 }
 
 export function sanitizeInput(input: string): string {

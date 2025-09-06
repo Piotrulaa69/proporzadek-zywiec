@@ -53,9 +53,9 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
-            <Link href="/order" className="btn-primary">
+            <a href="#calculator" className="btn-primary">
               Zamów sprzątanie
-            </Link>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -83,9 +83,13 @@ export default function Navigation() {
                   {item.label}
                 </Link>
               ))}
-              <Link href="/order" className="btn-primary text-center">
+              <a 
+                href="#calculator" 
+                className="btn-primary text-center"
+                onClick={() => setIsOpen(false)}
+              >
                 Zamów sprzątanie
-              </Link>
+              </a>
             </div>
           </div>
         )}

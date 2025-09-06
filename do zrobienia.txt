@@ -1,1 +1,4 @@
-do poprawnienia ceny w kalkulatorze i na stronie by wychodzić na +
+w /track dodac ilości do usług dodatkowych itp.
+ilości do dashboard admina
+finalizacja zamówienia w /order musi mieć padding top tak samo jak sledzenie zlecenia w /track
+w zmien kosztorys w /order musza być zapisane rzeczy które wybrales na glownej stronie. 

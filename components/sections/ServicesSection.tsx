@@ -13,7 +13,7 @@ export default function ServicesSection() {
         'Mycie okien od wewnątrz',
         'Wynoszenie śmieci'
       ],
-      priceFrom: 80,
+
       image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
     },
     {
@@ -27,7 +27,7 @@ export default function ServicesSection() {
         'Mycie okien i witryn',
         'Dezynfekcja powierzchni'
       ],
-      priceFrom: 120,
+
       image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
     },
     {
@@ -41,7 +41,7 @@ export default function ServicesSection() {
         'Usuwanie plam z farby',
         'Przygotowanie do użytkowania'
       ],
-      priceFrom: 200,
+
       image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
     }
   ]
@@ -95,15 +95,7 @@ export default function ServicesSection() {
                   ))}
                 </ul>
 
-                {/* Price */}
-                <div className="pt-4 border-t border-gray-200">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500">Cena od:</span>
-                    <span className="text-2xl font-bold text-primary-600">
-                      {service.priceFrom} zł
-                    </span>
-                  </div>
-                </div>
+
               </div>
             </div>
           ))}
@@ -122,8 +114,8 @@ export default function ServicesSection() {
               Oferujemy również mycie okien, pranie tapicerki, czyszczenie dywanów 
               i wiele innych usług dostosowanych do Twoich potrzeb.
             </p>
-            <a href="#contact" className="btn-primary">
-              Zapytaj o wycenę
+            <a href="#calculator" className="btn-primary">
+              Oblicz cenę
             </a>
           </div>
         </div>

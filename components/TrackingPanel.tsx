@@ -220,7 +220,12 @@ export default function TrackingPanel({ trackingId }: TrackingPanelProps) {
             <div className="flex items-start space-x-2">
               <MapPin className="h-4 w-4 text-gray-400 mt-0.5" />
               <span className="text-gray-600">Adres:</span>
-              <span className="font-medium">{order.address}</span>
+              <span className="font-medium">
+                {order.street && order.house_number && order.postal_code && order.city
+                  ? `${order.street} ${order.house_number}, ${order.postal_code} ${order.city}`
+                  : order.address
+                }
+              </span>
             </div>
           </div>
         </div>
@@ -247,6 +252,72 @@ export default function TrackingPanel({ trackingId }: TrackingPanelProps) {
           </div>
         </div>
       </div>
+
+      {/* Calculator Details */}
+      {order.service_details && (
+        <div className="card p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Szczegóły wyceny</h3>
+          <div className="bg-primary-50 rounded-lg p-4 space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-gray-700">Usługa:</span>
+              <span className="font-medium text-gray-900">{order.service_details.service_name}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-700">Cena bazowa:</span>
+              <span className="font-medium text-gray-900">{order.service_details.base_price} zł</span>
+            </div>
+            {order.service_details.additional_services_total > 0 && (
+              <div className="flex justify-between items-center">
+                <span className="text-gray-700">Usługi dodatkowe:</span>
+                <span className="font-medium text-gray-900">+{order.service_details.additional_services_total} zł</span>
+              </div>
+            )}
+            {order.service_details.eco_surcharge && (
+              <div className="flex justify-between items-center">
+                <span className="text-gray-700">Dopłata ekologiczna:</span>
+                <span className="font-medium text-gray-900">+{order.service_details.eco_surcharge} zł</span>
+              </div>
+            )}
+            <div className="border-t border-primary-200 pt-3 flex justify-between items-center">
+              <span className="text-lg font-semibold text-gray-900">Razem:</span>
+              <span className="text-2xl font-bold text-primary-600">
+                {typeof order.service_details.total_calculated === 'string' 
+                  ? order.service_details.total_calculated 
+                  : `${order.service_details.total_calculated} zł`
+                }
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Selected Additional Services */}
+      {order.additional_services && order.additional_services.length > 0 && (
+        <div className="card p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Wybrane usługi dodatkowe</h3>
+          <div className="space-y-2">
+            {order.additional_services.map((service, index) => (
+              <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-700">{service.name}</span>
+                  {service.quantity && service.quantity > 1 && (
+                    <span className="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded-full font-medium">
+                      x{service.quantity}
+                    </span>
+                  )}
+                </div>
+                <span className="font-medium text-gray-900">
+                  {service.id === 'eco' ? 
+                    <span className="text-green-600 font-semibold">GRATIS</span> : 
+                   service.quantity && service.quantity > 1 ? 
+                   `+${service.price * service.quantity} zł` : 
+                   `+${service.price} zł`}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Additional Notes */}
       {order.additional_notes && (
@@ -287,7 +358,7 @@ export default function TrackingPanel({ trackingId }: TrackingPanelProps) {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="tel:+48123456789"
+            href="tel:+48880118995"
             className="btn-primary inline-flex items-center justify-center"
           >
             <Phone className="mr-2 h-4 w-4" />
