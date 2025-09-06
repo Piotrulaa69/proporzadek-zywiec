@@ -1,4 +1,6 @@
-import { Shield, Award, Heart, Zap } from 'lucide-react'
+'use client'
+
+import { Shield, Award, Heart, Zap, Sparkles } from 'lucide-react'
 
 export default function AboutSection() {
   const features = [
@@ -63,14 +65,57 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Image */}
+          {/* Professional Banner */}
           <div className="relative">
-            <img
-              src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-              alt="Nasz zespół"
-              className="rounded-2xl shadow-xl"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+            {/* Professional CSS Banner */}
+            <div className="relative">
+              <div className="w-full h-96 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 rounded-2xl shadow-xl flex items-center justify-center text-white relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full"></div>
+                  <div className="absolute top-20 right-16 w-16 h-16 border-2 border-white rounded-full"></div>
+                  <div className="absolute bottom-16 left-20 w-12 h-12 border-2 border-white rounded-full"></div>
+                  <div className="absolute bottom-10 right-10 w-24 h-24 border-2 border-white rounded-full"></div>
+                </div>
+                
+                {/* Main Content */}
+                <div className="text-center z-10 px-8">
+                  {/* Logo */}
+                  <div className="mb-6">
+                    <div className="bg-white p-4 rounded-2xl shadow-lg inline-block mb-4">
+                      <Sparkles className="h-12 w-12 text-primary-600" />
+                    </div>
+                  </div>
+                  
+                  {/* Company Name */}
+                  <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-wide">
+                    ProPorządek
+                    <span className="block text-3xl md:text-4xl font-light mt-2">
+                      Żywiec
+                    </span>
+                  </h1>
+                  
+                  {/* Tagline */}
+                  <p className="text-xl md:text-2xl font-light opacity-90 mb-6">
+                    Profesjonalne usługi sprzątania
+                  </p>
+                  
+                  {/* Decorative Line */}
+                  <div className="w-24 h-1 bg-white mx-auto rounded-full opacity-80"></div>
+                </div>
+                
+                {/* Sparkle Effects */}
+                <div className="absolute top-1/4 left-1/4 animate-pulse">
+                  <Sparkles className="h-6 w-6 text-white opacity-60" />
+                </div>
+                <div className="absolute top-1/3 right-1/3 animate-pulse delay-1000">
+                  <Sparkles className="h-4 w-4 text-white opacity-40" />
+                </div>
+                <div className="absolute bottom-1/4 right-1/4 animate-pulse delay-500">
+                  <Sparkles className="h-5 w-5 text-white opacity-50" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

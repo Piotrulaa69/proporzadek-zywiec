@@ -21,7 +21,7 @@ Aplikacja jest wdrożona na Netlify.
 
 ## Kontakt
 - Telefon: +48 880 118 995
-- Email: piotrulaa@protonmail.com
+- Email: proporzadekzywiec@gmail.com
 - Adres: ul. Św. Marcina 69, 34-381 Radziechowy
 
 ---

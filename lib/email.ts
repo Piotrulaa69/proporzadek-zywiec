@@ -43,7 +43,7 @@ export async function sendOrderConfirmation(order: CleaningOrder) {
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
             <p><strong>Kontakt:</strong></p>
             <p>Telefon: +48 880 118 995</p>
-            <p>E-mail: piotrulaa@protonmail.com</p>
+            <p>E-mail: proporzadekzywiec@gmail.com</p>
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@ export async function sendQuotePDF(order: CleaningOrder) {
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
             <p><strong>Kontakt:</strong></p>
             <p>Telefon: +48 880 118 995</p>
-            <p>E-mail: piotrulaa@protonmail.com</p>
+            <p>E-mail: proporzadekzywiec@gmail.com</p>
           </div>
         </div>
       </div>

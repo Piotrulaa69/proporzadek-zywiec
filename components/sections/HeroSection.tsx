@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { ArrowRight, Star, Users, Clock } from 'lucide-react'
 
@@ -67,9 +69,13 @@ export default function HeroSection() {
           <div className="relative">
             <div className="relative z-10">
               <img
-                src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                alt="Profesjonalne sprzątanie"
+                src="/images/hero.png"
+                alt="Profesjonalne sprzątanie - ProPorządek Żywiec"
                 className="rounded-2xl shadow-2xl"
+                onError={(e) => {
+                  // Fallback do placeholder jeśli zdjęcie nie istnieje
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                }}
               />
             </div>
             {/* Decorative elements */}

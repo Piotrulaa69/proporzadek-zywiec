@@ -1,3 +1,5 @@
+'use client'
+
 import { Home, Building2, Hammer, Sparkles, CheckCircle } from 'lucide-react'
 
 export default function ServicesSection() {
@@ -14,7 +16,8 @@ export default function ServicesSection() {
         'Wynoszenie śmieci'
       ],
 
-      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      image: '/images/sprzatanie_mieszkan.png',
+      fallbackImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
     },
     {
       icon: Building2,
@@ -28,7 +31,8 @@ export default function ServicesSection() {
         'Dezynfekcja powierzchni'
       ],
 
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      image: '/images/sprzatanie_biur.png',
+      fallbackImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
     },
     {
       icon: Hammer,
@@ -42,7 +46,8 @@ export default function ServicesSection() {
         'Przygotowanie do użytkowania'
       ],
 
-      image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+      image: '/images/sprzatanie_po_remoncie.png',
+      fallbackImage: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
     }
   ]
 
@@ -70,6 +75,10 @@ export default function ServicesSection() {
                   src={service.image}
                   alt={service.title}
                   className="w-full h-48 object-cover"
+                  onError={(e) => {
+                    // Fallback do placeholder jeśli zdjęcie nie istnieje
+                    e.currentTarget.src = service.fallbackImage
+                  }}
                 />
                 <div className="absolute top-4 left-4 bg-primary-600 p-2 rounded-lg">
                   <service.icon className="h-6 w-6 text-white" />

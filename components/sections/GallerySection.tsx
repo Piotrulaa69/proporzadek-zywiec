@@ -9,37 +9,47 @@ interface GalleryItem {
   before: string
   after: string
   description: string
+  fallbackBefore?: string
+  fallbackAfter?: string
 }
 
-// Przykładowe zdjęcia - możesz zastąpić prawdziwymi
+// Galeria zdjęć przed/po - prawdziwe efekty sprzątania
 const galleryItems: GalleryItem[] = [
   {
     id: 1,
-    title: 'Sprzątanie kuchni',
-    before: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&h=300&fit=crop',
-    after: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop',
-    description: 'Kompleksowe sprzątanie kuchni - od tłustych powierzchni do lśniących blatów'
+    title: 'Sprzątanie domu',
+    before: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+    after: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Kompleksowe sprzątanie domu - od kuchni po łazienkę',
+    fallbackBefore: '/images/gallery/before-after-1-before.jpg',
+    fallbackAfter: '/images/gallery/before-after-1-after.jpg'
   },
   {
     id: 2,
-    title: 'Sprzątanie łazienki',
-    before: 'https://images.unsplash.com/photo-1620626011761-996317b8d101?w=400&h=300&fit=crop',
-    after: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop',
-    description: 'Usunięcie kamienia, pleśni i przywrócenie świeżości łazience'
+    title: 'Sprzątanie biura',
+    before: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+    after: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Profesjonalne sprzątanie przestrzeni biurowej dla lepszej produktywności',
+    fallbackBefore: '/images/gallery/before-after-2-before.jpg',
+    fallbackAfter: '/images/gallery/before-after-2-after.jpg'
   },
   {
     id: 3,
     title: 'Sprzątanie po remoncie',
-    before: 'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=400&h=300&fit=crop',
-    after: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-    description: 'Usunięcie kurzu budowlanego i przygotowanie mieszkania do zamieszkania'
+    before: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+    after: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Usunięcie kurzu budowlanego i przygotowanie mieszkania do zamieszkania',
+    fallbackBefore: '/images/gallery/before-after-3-before.jpg',
+    fallbackAfter: '/images/gallery/before-after-3-after.jpg'
   },
   {
     id: 4,
-    title: 'Sprzątanie biura',
-    before: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop',
-    after: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&h=300&fit=crop',
-    description: 'Profesjonalne sprzątanie przestrzeni biurowej dla lepszej produktywności'
+    title: 'Pranie tapicerki',
+    before: 'https://images.unsplash.com/photo-1620626011761-996317b8d101?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+    after: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+    description: 'Odzieżenie i odświeżenie mebli tapicerowanych',
+    fallbackBefore: '/images/gallery/before-after-4-before.jpg',
+    fallbackAfter: '/images/gallery/before-after-4-after.jpg'
   }
 ]
 
@@ -74,6 +84,11 @@ export default function GallerySection() {
                       src={item.before}
                       alt={`${item.title} - przed`}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        if (item.fallbackBefore) {
+                          e.currentTarget.src = item.fallbackBefore
+                        }
+                      }}
                     />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/20">
@@ -81,6 +96,11 @@ export default function GallerySection() {
                       src={item.after}
                       alt={`${item.title} - po`}
                       className="w-1/2 h-full object-cover ml-auto"
+                      onError={(e) => {
+                        if (item.fallbackAfter) {
+                          e.currentTarget.src = item.fallbackAfter
+                        }
+                      }}
                     />
                   </div>
                   

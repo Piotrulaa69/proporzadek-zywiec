@@ -16,6 +16,7 @@ import {
   LogOut,
   RefreshCw
 } from 'lucide-react'
+import PDFQuoteCreator from './PDFQuoteCreator'
 
 interface AdminDashboardProps {
   onLogout: () => void
@@ -30,6 +31,8 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
   const [selectedOrder, setSelectedOrder] = useState<CleaningOrder | null>(null)
   const [showOrderModal, setShowOrderModal] = useState(false)
   const [isUpdatingStatus, setIsUpdatingStatus] = useState(false)
+  const [showPDFCreator, setShowPDFCreator] = useState(false)
+  const [pdfOrder, setPdfOrder] = useState<CleaningOrder | null>(null)
 
   useEffect(() => {
     fetchOrders()
@@ -102,21 +105,9 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
     }
   }
 
-  const sendQuotePDF = async (orderId: string) => {
-    try {
-      const response = await fetch(`/api/admin/orders/${orderId}/send-quote`, {
-        method: 'POST',
-      })
-
-      if (response.ok) {
-        alert('Oferta PDF została wysłana do klienta!')
-      } else {
-        alert('Wystąpił błąd podczas wysyłania oferty.')
-      }
-    } catch (error) {
-      console.error('Error sending quote:', error)
-      alert('Wystąpił błąd podczas wysyłania oferty.')
-    }
+  const openPDFCreator = (order: CleaningOrder) => {
+    setPdfOrder(order)
+    setShowPDFCreator(true)
   }
 
   const exportToCSV = () => {
@@ -365,9 +356,9 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
                           <Edit3 className="h-4 w-4" />
                         </button>
                         <button
-                          onClick={() => sendQuotePDF(order.id)}
+                          onClick={() => openPDFCreator(order)}
                           className="text-blue-600 hover:text-blue-900"
-                          title="Wyślij ofertę PDF"
+                          title="Utwórz ofertę PDF"
                         >
                           <Mail className="h-4 w-4" />
                         </button>
@@ -406,6 +397,18 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
           }}
           onUpdateStatus={updateOrderStatus}
           isUpdating={isUpdatingStatus}
+        />
+      )}
+      
+      {/* PDF Quote Creator */}
+      {showPDFCreator && pdfOrder && (
+        <PDFQuoteCreator
+          order={pdfOrder}
+          isOpen={showPDFCreator}
+          onClose={() => {
+            setShowPDFCreator(false)
+            setPdfOrder(null)
+          }}
         />
       )}
     </div>

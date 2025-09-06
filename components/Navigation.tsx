@@ -13,7 +13,7 @@ export default function Navigation() {
     { href: '#home', label: 'Strona główna' },
     { href: '#about', label: 'O nas' },
     { href: '#services', label: 'Usługi' },
-    { href: '#gallery', label: 'Galeria' },
+    // { href: '#gallery', label: 'Galeria' }, // Tymczasowo ukryte
     { href: '#pricing', label: 'Cennik' },
     { href: '#testimonials', label: 'Opinie' },
     { href: '#contact', label: 'Kontakt' },

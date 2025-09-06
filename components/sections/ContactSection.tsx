@@ -11,8 +11,8 @@ export default function ContactSection() {
     {
       icon: Mail,
       title: 'E-mail',
-      details: ['piotrulaa@protonmail.com'],
-      action: 'mailto:piotrulaa@protonmail.com'
+      details: ['proporzadekzywiec@gmail.com'],
+      action: 'mailto:proporzadekzywiec@gmail.com'
     },
     {
       icon: MapPin,

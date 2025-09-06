@@ -365,7 +365,7 @@ export default function TrackingPanel({ trackingId }: TrackingPanelProps) {
             Zadzwoń
           </a>
           <a
-            href="mailto:piotrulaa@protonmail.com"
+            href="mailto:proporzadekzywiec@gmail.com"
             className="btn-secondary inline-flex items-center justify-center"
           >
             <Mail className="mr-2 h-4 w-4" />
